@@ -27,7 +27,7 @@ class Topicmodel < Formula
 end
 __END__
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 37680ad..d4bcdd6 100644
+index 37680ad..5cc3030 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -4,7 +4,7 @@ cmake_policy(VERSION 2.8.0)
@@ -39,7 +39,7 @@ index 37680ad..d4bcdd6 100644
 
  #include_directories(SYSTEM
  #            ${EIGEN3_INCLUDE_DIR}
-@@ -12,6 +12,10 @@ find_package(MiniBuola REQUIRED)
+@@ -12,10 +12,14 @@ find_package(MiniBuola REQUIRED)
 
  #FILE(GLOB_RECURSE cc_sources *.cc)
  set(cc_sources ccorpus.cc cmodel.cc main.cc opt.cc)
@@ -50,8 +50,13 @@ index 37680ad..d4bcdd6 100644
 
  add_executable(TopicModel ${cc_sources})
  add_definitions(-std=c++11 -DNDEBUG)
-diff --git a/ccorpus.cc b/ccorpus.cc
+
+ target_link_libraries(TopicModel buolamini gsl gslcblas nlopt)
+
+-install(TARGETS TopicModel DESTINATION /usr/local/bin)
++install(TARGETS TopicModel DESTINATION bin)
 index 6518a08..538506d 100644
+diff --git a/ccorpus.cc b/ccorpus.cc
 --- a/ccorpus.cc
 +++ b/ccorpus.cc
 @@ -34,6 +34,7 @@
